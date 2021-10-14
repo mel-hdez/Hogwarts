@@ -1,0 +1,339 @@
+@charset "UTF-8";
+/* COLORS */
+/* efectos para el contenedor de pantalla completa */
+.contenedor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+@media (max-width: 775px) {
+  .contenedor .contenedorcentrado {
+    flex-direction: column-reverse;
+    min-width: 380px;
+    width: 90%;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    -webkit-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+    box-sizing: border-box;
+  }
+}
+
+.contenerdor-center {
+  margin: 10% auto;
+}
+
+.loginform {
+  color: #FFF;
+}
+
+/* contenedor del login a la izquierda */
+.contenedorcentrado {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  min-width: 380px;
+  width: 100%;
+  background-color: #F6F6F7;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  -webkit-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+/* formulario de login */
+.login {
+  width: 100%;
+  max-width: 320px;
+  min-width: 320px;
+  padding: 30px 30px 50px 30px;
+  background-color: #2a628f;
+  -webkit-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 3px 3px 3px 3px;
+  -moz-border-radius: 3px 3px 3px 3px;
+  -webkit-border-radius: 3px 3px 3px 3px;
+  box-sizing: border-box;
+  opacity: 1;
+  filter: alpha(opacity=1);
+}
+@media (max-width: 775px) {
+  .login .login {
+    margin: 0 auto;
+  }
+}
+
+.login label {
+  display: block;
+  font-family: "Overpass", sans-serif;
+  font-size: 120%;
+  margin-top: 15px;
+}
+@media (max-width: 775px) {
+  .login label .login label {
+    text-align: left;
+  }
+}
+
+.login input {
+  font-size: 110%;
+  color: #1b262c;
+  display: block;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+  padding: 5px 5px 5px 10px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 3px 3px 3px 3px;
+  -moz-border-radius: 3px 3px 3px 3px;
+  -webkit-border-radius: 3px 3px 3px 3px;
+}
+
+.login input::placeholder {
+  font-family: "Overpass", sans-serif;
+}
+
+.login button {
+  font-family: "Overpass", sans-serif;
+  font-size: 110%;
+  color: #FFF;
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-radius: 3px 3px 3px 3px;
+  -moz-border-radius: 3px 3px 3px 3px;
+  -webkit-border-radius: 3px 3px 3px 3px;
+  background-color: #3e92cc;
+  margin-top: 10px;
+}
+
+.login button:hover {
+  background-color: #18435a;
+  color: #FFF;
+}
+
+.derecho {
+  text-align: center;
+  width: 100%;
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+  padding: 20px 20px 20px 50px;
+  box-sizing: border-box;
+  color: #2a628f;
+}
+@media (max-width: 775px) {
+  .derecho .derecho {
+    padding: 20px 20px 20px 20px;
+  }
+}
+
+.titulo {
+  font-size: 300%;
+  color: #2a628f;
+}
+
+.logo-empresa img {
+  width: 60%;
+}
+
+hr {
+  border-top: 1px solid #2a628f;
+  border-bottom: 1px solid #2a628f;
+}
+
+.pie-form {
+  font-size: 90%;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.pie-form a {
+  display: block;
+  text-decoration: none;
+  color: #2a628f;
+  margin-bottom: 3px;
+}
+
+.pie-form a:hover {
+  color: #18435a;
+}
+
+.bton-ini {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: -30px;
+}
+
+/*** ESTILOS BOTÓN GROW BOX ***/
+.ov-btn-grow-box {
+  background: #fff;
+  /* color de fondo */
+  color: #3e92cc;
+  /* color de fuente */
+  border: 2px solid #3e92cc;
+  /* tamaño y color de borde */
+  padding: 10px;
+  text-align: center;
+  width: 220px;
+  height: 50px;
+  border-radius: 20px;
+  /* redondear bordes */
+  position: relative;
+  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.ov-btn-grow-box:hover {
+  color: #fff;
+  /* color de fuente hover */
+  text-decoration: none;
+}
+
+.ov-btn-grow-box::after {
+  content: "";
+  background: #3e92cc;
+  /* color de fondo hover */
+  position: absolute;
+  z-index: -1;
+  padding: 16px 20px;
+  display: block;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transform: scale(0, 0);
+  transition: all 0.3s ease;
+}
+
+.ov-btn-grow-box:hover::after {
+  transition: all 0.3s ease-out;
+  transform: scale(1, 1);
+}
+
+.emp-profile {
+  padding: 3%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+.profile-img {
+  text-align: center;
+}
+
+.profile-img img {
+  width: 70%;
+  height: 100%;
+}
+
+.profile-img .file {
+  position: relative;
+  overflow: hidden;
+  margin-top: -20%;
+  width: 70%;
+  border: none;
+  border-radius: 0;
+  font-size: 15px;
+  background: #212529b8;
+}
+
+.profile-img .file input {
+  position: absolute;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
+
+.profile-head h5 {
+  color: #333;
+}
+
+.profile-head h6 {
+  color: #0062cc;
+}
+
+.profile-edit-btn {
+  border: none;
+  border-radius: 1.5rem;
+  width: 100%;
+  padding: 5px;
+  font-weight: 600;
+  color: #6c757d;
+  cursor: pointer;
+  margin-left: -120px;
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+}
+
+.proile-rating {
+  font-size: 12px;
+  color: #818182;
+  margin-top: 5%;
+}
+
+.proile-rating span {
+  color: #495057;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.profile-head .nav-tabs {
+  margin-bottom: 5%;
+}
+
+.profile-head .nav-tabs .nav-link {
+  font-weight: 600;
+  border: none;
+}
+
+.profile-head .nav-tabs .nav-link.active {
+  border: none;
+  border-bottom: 2px solid #0062cc;
+}
+
+.profile-tab label {
+  font-weight: 600;
+}
+
+.profile-tab p {
+  font-weight: 600;
+  color: #0062cc;
+}
+
+.btn-primary {
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+}
+
+.content-form {
+  padding: 30px;
+}
+
+.input-motivo {
+  height: 122px;
+}
+
+.form-row {
+  margin-top: 30px;
+}

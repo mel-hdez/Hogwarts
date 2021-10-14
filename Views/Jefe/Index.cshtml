@@ -1,0 +1,175 @@
+@using Microsoft.AspNetCore.Http
+@{
+    @using Hogwarts.Data
+    Hogwarts.Data.Usuario user = ViewBag.user;
+    Hogwarts.Data.Departamento dep = ViewBag.dep;
+    ViewBag.Title = "Index";
+}
+
+<div class="container emp-profile">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="profile-head">
+                <h5>@Context.Session.GetString("pNom") @Context.Session.GetString("sNom")</h5>
+                <h6>Jefe del @dep.Nombre</h6>
+                <p class="proile-rating"></p>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                            aria-controls="home" aria-selected="true">Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                            aria-controls="profile" aria-selected="false">Permisos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Nombre</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@user.PrimerNombre</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Apellido</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@user.SegundoNombre</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Correo</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@user.Correo</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Fecha de Nacimiento</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@user.FechaNacimiento</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Fecha de Ingreso</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@user.FechaIngreso</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                         <h4>Permisos de cumpleaños</h4>
+                        <div id="permisoCumple" class="row">
+                            <table class="table">
+                                <thead>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col"></th>
+                                </thead>
+                                <tbody>
+                            @foreach (var item in @ViewBag.persC)
+                            {
+                                <tr>
+                                    <th scope="row">@item.Id</th>
+                                    <td>@item.Fecha</td>
+                                    <td>@item.Status</td>
+                                    <form action="/Jefe/AceptarPermiso" method="POST">
+                                        <td>
+                                            <input type="hidden" name="permisoId" value="@item.Id">
+                                            <input type="hidden" name="tipoPermiso" value="PC">
+                                            <input type="submit" class="btn btn-success btn-sm" value="Validar">
+                                        </td>
+                                    </form>
+                                </tr>   
+                            }
+                                </tbody>
+                            </table>
+                        </div>
+                        <br/>
+                        <h4>Permisos de Horas</h4>
+                        <div id="permisoHora" class="row">
+                            <table class="table">
+                                <thead>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Motivo</th>
+                                    <th scope="col">Horario</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col"></th>
+                                </thead>
+                                <tbody>
+                            @foreach (var item in @ViewBag.persH)
+                            {
+                                <tr>
+                                    <th scope="row">@item.Id</th>
+                                    <td>@item.Motivo</td>
+                                    <td>@item.Horario</td>
+                                    <td>@item.Fecha</td>
+                                    <td>@item.Status</td>
+                                    <form action="/Jefe/AceptarPermiso" method="POST">
+                                        <td>
+                                            <input type="hidden" name="permisoId" value="@item.Id">
+                                            <input type="hidden" name="tipoPermiso" value="PH">
+                                            <input type="submit" class="btn btn-success btn-sm" value="Validar">
+                                        </td>
+                                    </form>
+                                </tr>   
+                            }
+                                </tbody>
+                            </table>
+                            }
+                        </div>
+                        <br/>
+                        <h4>Permisos Economicos</h4>
+                        <div id="permisoEcono" class="row">
+                            <table class="table">
+                                <thead>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Fecha Inicio</th>
+                                    <th scope="col">Estado Final</th>
+                                    <th scope="col"></th>
+                                </thead>
+                                <tbody>
+                            @foreach (var item in @ViewBag.persE)
+                            {
+                                <tr>
+                                    <th scope="row">@item.Id</th>
+                                    <td>@item.FechaInicio</td>
+                                    <td>@item.FechaFinal</td>
+                                    <form action="/Jefe/AceptarPermiso" method="POST">
+                                        <td>
+                                            <input type="hidden" name="permisoId" value="@item.Id">
+                                            <input type="hidden" name="tipoPermiso" value="PE">
+                                            <input type="submit" class="btn btn-success btn-sm" value="Validar">
+                                        </td>
+                                    </form>
+
+                                </tr>   
+                            }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+</script>

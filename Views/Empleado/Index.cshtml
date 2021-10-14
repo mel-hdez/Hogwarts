@@ -1,0 +1,262 @@
+@using Microsoft.AspNetCore.Http
+@{
+    @using Hogwarts.Data
+    Hogwarts.Data.Usuario user = ViewBag.user;
+    Hogwarts.Data.Departamento dep = ViewBag.dep;
+    ViewBag.Title = "Index";
+}
+<p id="fechaTemp" style="display: none;">@ViewBag.fecha</p>
+<div class="container emp-profile">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="profile-head">
+                <h5>@Context.Session.GetString("pNom") @Context.Session.GetString("sNom")</h5>
+                <h6>@dep.Nombre</h6>
+                <p class="proile-rating"></p>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                            aria-controls="home" aria-selected="true">Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                            aria-controls="profile" aria-selected="false">Historial Permisos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Nombre</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@user.PrimerNombre</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Apellido</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@user.SegundoNombre</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Correo</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@user.Correo</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Fecha de Nacimiento</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@user.FechaNacimiento</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Fecha de Ingreso</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@user.FechaIngreso</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <h4>Permisos de cumpleaños</h4>
+                        <div id="permisoCumple" class="row">
+                            @foreach (var item in @ViewBag.perC)
+                            {
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Permiso de cumpleaños</h5>
+                                            <p class="card-text">
+                                                Fecha: @item.Fecha<br/>
+                                                Estado: @item.Status
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <br/>
+                        <h4>Permisos de Horas</h4>
+                        <div id="permisoHora" class="row">
+                            @foreach (var item in @ViewBag.perH)
+                            {
+                            <div class="col-sm-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Permiso de 2 horas</h5>
+                                        <p class="card-text">
+                                            Motivo: @item.Motivo<br/>
+                                            Horario: @item.Horario<br/>
+                                            Fecha Permiso: @item.Fecha<br/>
+                                            Estado: @item.Status
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                        <br/>
+                        <h4>Permisos Economicos</h4>
+                        <div id="permisoEcono" class="row">
+                            @foreach (var item in @ViewBag.perE)
+                            {
+                            <div class="col-sm-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Permiso de Economico</h5>
+                                        <p class="card-text">
+                                            Fecha Inicio: @item.FechaInicio <br/>
+                                            Feceha Final: @item.FechaFinal   <br/>
+                                            Estado: @item.Status
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Solicitar
+            Permiso</button>
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="content-form">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="inputState">Tipo de Permiso</label>
+                                <select id="status" onchange="mostrar(this.value);" class="form-control">
+                                    <option selected>Seleccione el tipo de permiso</option>
+                                    <option value="hPermiso">2 Horas </option>
+                                    <option value="ePermiso">Días económicos</option>
+                                    <option value="cPermiso">Cumpleaños</option>
+                                </select>
+                            </div>
+                        </div>
+                        <form id="hPermiso" action="/Empleado/PermisoHora" method="POST" class="form-signin" style="display: none;">
+                            <div class="form-group">
+                                <label>Motivo de permiso</label>
+                                <input type="text" name="motivo" class="form-control" placeholder="Motivo" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Horario</label>
+                                <select name="horario" class="form-control" required>
+                                    <option disabled selected>Selecciona un horario</option>
+                                    <option value="matutino"> Matutino </option>
+                                    <option value="vespertino"> Vespertino </option>
+                                </select>
+                            </div>
+                            <input type="submit" value="Enviar" class="btn btn-primary" />
+                        </form>
+
+                        <form id="ePermiso" action="/Empleado/PermisoEcono" method="POST" class="form-signin" style="display: none;">
+                            <div class="form-group">
+                                <label>Fecha inicio</label>
+                                <input id="inicio" type="date" class="form-control" name="fechaInicio" onchange="limitarFechaFinal();" required> 
+                            </div>
+                            <br/>
+                            <div class="form-group">
+                                <label>Fecha final</label>
+                                <input id="final" type="date" class="form-control" name="fechaFinal" required>
+                            </div>
+                            <br/>
+                            <input type="submit" value="Enviar" class="btn btn-primary" />
+                        </form>
+
+                        <form id="cPermiso" action="/Empleado/PermisoCumple" method="POST" class="form-signin" style="display: none;">
+                            <div class="form-group">
+                                <label>Fecha</label>
+                                <input id="cumpleFecha" type="date" class="form-control" name="fechaCumple" required>
+                            </div>
+                            <input type="submit" value="Enviar" class="btn btn-primary" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        //Se agrega el minimo de dias con JS para la fecha de inicio, de los permisos economicos
+        //Se inicializa el minimo de fecha para el permiso economico
+        var hoy = new Date();
+        var dd = hoy.getDate()+2;
+        var mm = hoy.getMonth()+1; //January is 0 so need to add 1 to make it 1!
+        var yyyy = hoy.getFullYear();
+        if(dd<10){
+            dd='0'+dd
+        } 
+        if(mm<10){
+            mm='0'+mm
+        }
+        hoy = yyyy+'-'+mm+'-'+dd;
+        document.getElementById("inicio").setAttribute("min", hoy);
+
+        //Se inicializa el minimo de fecha para el permiso cumpleanos
+        var temp = document.getElementById('fechaTemp').textContent
+        var fechaCumple = new Date(temp)
+        var ddCumple = fechaCumple.getDate()
+        var mmCumple = fechaCumple.getMonth() + 7;
+        if(ddCumple<10){
+            ddCumple='0'+ddCumple
+        } 
+        if(mmCumple<10){
+            mmCumple='0'+mmCumple
+        }
+        fechaCumple = yyyy +'-'+ mmCumple +'-'+ ddCumple;
+        document.getElementById("cumpleFecha").setAttribute("max", fechaCumple);
+
+
+        function limitarFechaFinal(){
+            let ini = $("#inicio").val();
+            let fecha = new Date(ini);
+            console.log(fecha)
+            fecha.setDate(fecha.getDate() + 7)
+            let dia = fecha.getDate()
+            let mes = fecha.getMonth()
+            if(dia<10){
+                dia='0'+dia
+            } 
+            if(mes<10){
+                mes='0'+mes
+            }
+            let fechaFormat = fecha.getFullYear() + "-" + mes + "-" + dia
+            document.getElementById("final").setAttribute("max", fechaFormat);          
+        }
+
+        function mostrar(id) {
+            if (id == "cPermiso") {
+                $("#cPermiso").show();
+                $("#hPermiso").hide();
+                $("#ePermiso").hide();
+            }
+            if (id == "hPermiso") {
+                $("#cPermiso").hide();
+                $("#hPermiso").show();
+                $("#ePermiso").hide();
+            }
+
+            if (id == "ePermiso") {
+                $("#cPermiso").hide();
+                $("#hPermiso").hide();
+                $("#ePermiso").show();
+            }
+        }
+    </script>
